@@ -16,7 +16,6 @@ $(`#searchBtn`).on("click", function () {
             "x-rapidapi-key": "8addb057bamsh9ccd55dc462f4f4p1237d6jsn8ed930a43da9"
         }
     }).then((response) => {
-
         if (!response.results.length) {
             alert('No record found')
             return;
@@ -29,7 +28,5 @@ $(`#searchBtn`).on("click", function () {
             dataStore.description = event.description;
             console.log(dataStore);
         })
-
     });
-
 });
