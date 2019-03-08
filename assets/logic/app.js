@@ -1,3 +1,8 @@
+// added cyper text
+
+let token='dGJKSzk2NW9LYmFDSW9LeDFIcGVQcFNlM2gxMmtI';
+let key='OGFkZGIwNTdiYW1zaDljY2Q1NWRjNDYyZjRmNHAxMjM3ZDZqc244ZWQ5MzBhNDNkYTk';
+
 let dataStore = {
     startDate: null,
     endDate: null,
@@ -14,8 +19,8 @@ $(`#searchBtn`).on("click", function () {
         url,
         method,
         headers: {
-            "authorization": "Bearer tbJK965oKbaCIoKx1HpePpSe3h12kH",
-            "x-rapidapi-key": "8addb057bamsh9ccd55dc462f4f4p1237d6jsn8ed930a43da9"
+            "authorization": `Bearer ${atob(token)}`,
+            "x-rapidapi-key": `${atob(key)}`
         }
     }).then((response) => {
         if (!response.results.length) {
