@@ -1,0 +1,253 @@
+
+/*Landing Page CSS*/
+#backgroundVideo {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%; 
+	min-height: 100%;
+}
+.content {
+	position: fixed;
+	bottom: 25%;
+	margin: 0 15%;
+	padding: 0;
+	color: #f1f1f1;
+	width: 70%;
+}
+.jumbotron {
+  background-color: #6b92a4;
+  border-radius: 25px;
+}
+.fun-button {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  border-radius: 0.6em;
+  color: #e74c3c;
+  cursor: pointer;
+  display: block;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 2% auto;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+}
+.fun-button:hover, .fun-button:focus {
+  color: #fff;
+  outline: 0;
+}
+.landing-button {
+  border-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.8) 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  transition: background 300ms ease-in-out;
+}
+.landing-button:hover {
+  background-position: 0;
+}
+
+.landing-inp {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+}
+input {
+    -webkit-appearance: none;
+    width: 50%;
+    border: 0;
+    padding: 12px 0;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid white;
+    background: none;
+    border-radius: 0;
+    color: white;
+}
+input:hover {
+      background: rgba(#223254,.03);
+}
+input:focus {
+      background: none;
+      outline: none;
+}
+/*End Landing Page CSS*/
+
+
+
+/*login / sign up page css*/
+#login-body {
+  background-color: #6b92a4;
+}
+
+.form-container {
+  background-color: black;
+  border-radius: 15px;
+  margin: 8% auto;
+  height: 550px;
+  width: 350px;
+  position: relative;
+  overflow: hidden;
+}
+.form-container:after {
+  content: "";
+  opacity: 0.8;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 500px;
+  background-color: #6b92a4;
+}
+.form-title {
+  color: #fff;
+  font-size: 1.7em;
+  text-align: center;
+}
+.form-title span {
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease;
+}
+.input {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  color: black;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  padding: 8px 15px;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  font-size: 12px;
+}
+.input:last-child {
+  border-bottom: 0;
+}
+.submit-btn {
+  border: 0;
+  border-radius: 15px;
+  display: block;
+  margin: 15px auto;
+  padding: 15px 45px;
+  width: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: all 0.3s ease;
+}
+.submit-btn:hover {
+  transition: all 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.login {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 5;
+  -webkit-transition: all 0.3s ease;
+  }
+.login::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  -webkit-transform: translate(-50%, 0);
+  background-color: #fff;
+  width: 200%;
+  height: 250px;
+  border-radius: 50%;
+  z-index: 4;
+  -webkit-transition: all 0.3s ease;
+}
+.center {
+  position: absolute;
+  top: calc(50% - 10%);
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  width: 65%;
+  z-index: 5;
+  -webkit-transition: all 0.3s ease;
+}
+.form-title {
+  color: #000;
+  font-size: 1.7em;
+  text-align: center;
+}
+.form-title span {
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease;
+}
+.form-holder {
+  border-radius: 15px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  overflow: hidden;
+  margin-top: 50px;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: all 0.3s ease;
+}
+.form-holder .input {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  padding: 8px 15px;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  font-size: 12px;
+}
+.form-holder .input:last-child {
+  border-bottom: 0;
+}
+.form-holder .input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+.submit-btn {
+  background-color: #6b92a4;
+  color: rgba(256, 256, 256, 0.7);
+  border: 0;
+  border-radius: 15px;
+  display: block;
+  margin: 15px auto;
+  padding: 15px 45px;
+  width: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: all 0.3s ease;
+}
+.submit-btn:hover {
+  transition: all 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/*end login / sign up page css*/
