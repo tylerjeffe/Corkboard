@@ -126,8 +126,6 @@ $('.content').on('click', '.save-event-button', function () {
     }, 500)
 
 });
-
-
 // delete event
 $('#delete-event-button').on('click', function () {
     eventName = $('#event-name').text().trim();
@@ -216,9 +214,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    // var x = document.getElementById("location");
-    // x.innerHTML = "Latitude: " + position.coords.latitude +
-    //     "<br>Longitude: " + position.coords.longitude;
     latlon = position.coords.latitude + "," + position.coords.longitude;
     $.ajax({
         type: "GET",
@@ -227,9 +222,6 @@ function showPosition(position) {
         dataType: "json",
         success: function (response) {
             loadEventsData(response);
-            // var e = document.getElementById("events");
-            // e.innerHTML = json.page.totalElements + " events found.";
-            // showEvents(json);
         },
         error: function (xhr, status, err) {
             console.log(err);
