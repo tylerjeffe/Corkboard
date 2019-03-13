@@ -21,10 +21,6 @@ function loadEvents() {
         url,
         method
     }).then((response) => {
-        if (!response._embedded.events.length) {
-            alert('No record found')
-            return;
-        }
         let counter = 0;
         console.log(response._embedded.events);
         $('#backgroundVideo').remove();
@@ -46,6 +42,8 @@ function loadEvents() {
             $('.content').append(resultDiv);
             counter++;
         })
+    }).catch(function(){
+        alert('No events found');
     });
 }
 
