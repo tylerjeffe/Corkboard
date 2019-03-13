@@ -1,17 +1,39 @@
 'use strict';
 // added cyper text
 let newToken = 'TFZtRGs5MjNSY0hEdjdoZDgwdFc4RjBQNU9ZU2ZBbHo';
-let newUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=${atob(newToken)}&size=2`
-
-
-// let token = 'dGJKSzk2NW9LYmFDSW9LeDFIcGVQcFNlM2gxMmtI';
-// let key = `OGFkZGIwNTdiYW1zaDljY2Q1NWRjNDYyZjRmNHAxMjM3ZDZqc244ZWQ5MzBhNDNkYTk`;
+let newUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=${atob(newToken)}&size=10`
+let latlon;
 
 let dataStore = {
     startDate: null,
     endDate: null,
     name: null,
     description: null
+}
+
+function loadEventsData(response) {
+    let counter = 0;
+    console.log(response._embedded.events);
+    $('#backgroundVideo').remove();
+    $('.content').html('').css('position', 'static').attr('class', 'content row mt-5');
+    // console.log(response);
+    response._embedded.events.map(event => {
+        let resultDiv = $('<div>').attr('class', 'jumbotron text-center mt-3').attr('id', 'new-jumbo');
+        console.log('start', event.dates.start.localDate);
+        console.log('end', event.sales.public.endDateTime);
+        dataStore.startDate = moment(event.dates.start.localDate).format('dddd, MMMM Do YYYY');
+        dataStore.endDate = moment(event.sales.public.endDateTime).format('dddd, MMMM Do YYYY');
+        dataStore.name = event.name;
+        dataStore.description = event.name;
+        let startDateDiv = $('<p>').attr('class', 'row mt-5').attr('id', `startDate-${counter}`).text(`Start Date: ${dataStore.startDate}`);
+        let endDateDiv = $('<p>').attr('class', 'row').attr('id', `endDate-${counter}`).text(`End Date: ${dataStore.endDate}`);
+        let nameDiv = $('<h3>').attr('class', 'row').attr('id', `name-${counter}`).text(`Event: ${dataStore.name}`);
+        let descriptionDiv = $('<p>').attr('class', 'row').attr('id', `description-${counter}`).text(dataStore.description);
+        let addButton = $('<button>').attr('class', 'fun-button landing-button row save-event-button').attr('id', `save-event-button-${counter}`).text('Save Event');
+        resultDiv.append(nameDiv, startDateDiv, endDateDiv, descriptionDiv, addButton);
+        $('.content').append(resultDiv);
+        counter++;
+    })
 }
 
 function loadEvents() {
@@ -21,28 +43,8 @@ function loadEvents() {
         url,
         method
     }).then((response) => {
-        let counter = 0;
-        console.log(response._embedded.events);
-        $('#backgroundVideo').remove();
-        $('.content').html('').css('position', 'static').attr('class', 'content row mt-5');
-        response._embedded.events.map(event => {
-            let resultDiv = $('<div>').attr('class', 'jumbotron text-center mt-3').attr('id', 'new-jumbo');
-            console.log('start', event.dates.start.localDate);
-            console.log('end', event.sales.public.endDateTime);
-            dataStore.startDate = moment(event.dates.start.localDate).format('dddd, MMMM Do YYYY');
-            dataStore.endDate = moment(event.sales.public.endDateTime).format('dddd, MMMM Do YYYY');
-            dataStore.name = event.name;
-            dataStore.description = event.name;
-            let startDateDiv = $('<p>').attr('class', 'row mt-5').attr('id', `startDate-${counter}`).text(`Start Date: ${dataStore.startDate}`);
-            let endDateDiv = $('<p>').attr('class', 'row').attr('id', `endDate-${counter}`).text(`End Date: ${dataStore.endDate}`);
-            let nameDiv = $('<h3>').attr('class', 'row').attr('id', `name-${counter}`).text(`Event: ${dataStore.name}`);
-            let descriptionDiv = $('<p>').attr('class', 'row').attr('id', `description-${counter}`).text(dataStore.description);
-            let addButton = $('<button>').attr('class', 'fun-button landing-button row save-event-button').attr('id', `save-event-button-${counter}`).text('Save Event');
-            resultDiv.append(nameDiv, startDateDiv, endDateDiv, descriptionDiv, addButton);
-            $('.content').append(resultDiv);
-            counter++;
-        })
-    }).catch(function(){
+        loadEventsData(response);
+    }).catch(function () {
         alert('No events found');
     });
 }
@@ -50,21 +52,12 @@ function loadEvents() {
 let searchCriteria;
 let locationCriteria;
 $(`#searchBtn`).on("click", function () {
-    let searchTerms = ['event','volunteer','attraction','conferences', 'politics', 'concerts', 'festivals', 'performing-arts', 'sports', 'community', 'airport', 'weather', 'disasters', 'terror'];
+    let searchTerms = ['event', 'volunteer', 'attraction', 'conferences', 'politics', 'concerts', 'festivals', 'dog', 'sports', 'community', 'airport', 'weather', 'disasters', 'terror'];
     searchCriteria = $('#landing-inp').val();
     locationCriteria = $('#zipcode').val();
-    if (searchTerms.indexOf(searchCriteria) > -1) {
-        $('.search-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
-        setTimeout(loadEvents, 1000);
-    } else {
-        $('#search-jumbo').attr('class', 'container col-6')
-        let searchCriteriaDiv = $('<div>').attr('class', 'container col-6');
-        let jumbotron = $('<div>').attr('class', 'text-center');
-        let paragraph = $('<div>').attr('class', 'text-left').html('<p>None found. Try using one of these search terms:</p><div class="row"><div class="col"><ul><li>school-holidays</li><li>public-holidays</li><li>observances</li><li>politics</li><li>conferences</li><li>expos</li><li>concerts</li><li>festivals</li></ul></div><div class="col"><ul><li>performing-arts</li><li>sports</li><li>community</li><li>daylight-savings</li><li>airport-delays</li><li>severe-weather</li><li>disasters</li><li>terror</li></ul></div></div></div></div>');
-        jumbotron.append(paragraph);
-        searchCriteriaDiv.append(jumbotron);
-        $('.content').prepend(searchCriteriaDiv);
-    }
+    // if (searchTerms.indexOf(searchCriteria) > -1) {
+    $('.search-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+    setTimeout(loadEvents, 1000);
 });
 
 
@@ -216,27 +209,27 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        var x = document.getElementById("location");
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        alert('You need to allow the location!')
+        // var x = document.getElementById("location");
+        // x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 function showPosition(position) {
-    var x = document.getElementById("location");
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
-    var latlon = position.coords.latitude + "," + position.coords.longitude;
-
+    // var x = document.getElementById("location");
+    // x.innerHTML = "Latitude: " + position.coords.latitude +
+    //     "<br>Longitude: " + position.coords.longitude;
+    latlon = position.coords.latitude + "," + position.coords.longitude;
     $.ajax({
         type: "GET",
         url: `${newUrl}&latlong=${latlon}`,
         async: true,
         dataType: "json",
-        success: function (json) {
-            console.log(json);
-            var e = document.getElementById("events");
-            e.innerHTML = json.page.totalElements + " events found.";
-            showEvents(json);
+        success: function (response) {
+            loadEventsData(response);
+            // var e = document.getElementById("events");
+            // e.innerHTML = json.page.totalElements + " events found.";
+            // showEvents(json);
         },
         error: function (xhr, status, err) {
             console.log(err);
@@ -247,25 +240,21 @@ function showPosition(position) {
 function showError(error) {
     switch (error.code) {
         case error.PERMISSION_DENIED:
-            x.innerHTML = "User denied the request for Geolocation."
+
+            alert("User denied the request for Geolocation.")
             break;
         case error.POSITION_UNAVAILABLE:
-            x.innerHTML = "Location information is unavailable."
+            alert("Location information is unavailable.")
             break;
         case error.TIMEOUT:
-            x.innerHTML = "The request to get user location timed out."
+            alert("The request to get user location timed out.")
             break;
         case error.UNKNOWN_ERROR:
-            x.innerHTML = "An unknown error occurred."
+            alert("An unknown error occurred.")
             break;
     }
 }
 
-
-function showEvents(json) {
-    for (var i = 0; i < json.page.size; i++) {
-        $("#events").append("<p>" + json._embedded.events[i].name + "</p>");
-    }
-}
-
-getLocation();
+$(`#near-me-btn`).on("click", async function () {
+    await getLocation();
+});
