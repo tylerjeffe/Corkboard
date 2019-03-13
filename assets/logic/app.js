@@ -37,7 +37,7 @@ function loadEventsData(response) {
 }
 
 function loadEvents() {
-    let url = newUrl + "&postalCode=" + locationCriteria + "&keyword=" + searchCriteria;
+    let url = newUrl + "&stateCode=" + locationCriteria + "&keyword=" + searchCriteria;
     let method = "GET";
     $.ajax({
         url,
@@ -54,7 +54,7 @@ let locationCriteria;
 $(`#searchBtn`).on("click", function () {
     let searchTerms = ['event', 'volunteer', 'attraction', 'conferences', 'politics', 'concerts', 'festivals', 'dog', 'sports', 'community', 'airport', 'weather', 'disasters', 'terror'];
     searchCriteria = $('#landing-inp').val();
-    locationCriteria = $('#zipcode').val();
+    locationCriteria = $('#statecode').val();
     // if (searchTerms.indexOf(searchCriteria) > -1) {
     $('.search-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
     setTimeout(loadEvents, 1000);
