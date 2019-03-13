@@ -29,8 +29,8 @@ function loadEvents() {
             let resultDiv = $('<div>').attr('class', 'jumbotron text-center mt-3').attr('id', 'new-jumbo');
             console.log('start', event.dates.start.localDate);
             console.log('end', event.sales.public.endDateTime);
-            dataStore.startDate = moment(event.dates.start.localDate).format('dddd, MMMM Do YYYY');
-            dataStore.endDate = moment(event.sales.public.endDateTime).format('dddd, MMMM Do YYYY');
+            dataStore.startDate = moment(event.dates.start.localDate).format('dddd, MMMM Do YYYY, hh mm');
+            dataStore.endDate = moment(event.sales.public.endDateTime).format('dddd, MMMM Do YYYY, hh mm');
             dataStore.name = event.name;
             dataStore.description = event.name;
             let startDateDiv = $('<p>').attr('class', 'row mt-5').attr('id', `startDate-${counter}`).text(`Start Date: ${dataStore.startDate}`);
@@ -43,9 +43,17 @@ function loadEvents() {
             counter++;
         })
     }).catch(function(){
-        alert('No events found');
+        // alert('No events found');
+        $('.search-form').html('');
+        let h1 = $('<h3>').text('No events were found...');
+        let button = $('<button>').attr('class', 'fun-button landing-button').attr('id', 'newSearchBtn').text('Try Again?');
+        $('.search-form').append(h1, button);
+        // location.reload();
     });
 }
+$('.search-form').on('click', '#newSearchBtn', function() {
+    location.reload();
+})
 
 let searchCriteria;
 let locationCriteria;
@@ -53,18 +61,18 @@ $(`#searchBtn`).on("click", function () {
     let searchTerms = ['event','volunteer','attraction','conferences', 'politics', 'concerts', 'festivals', 'performing-arts', 'sports', 'community', 'airport', 'weather', 'disasters', 'terror'];
     searchCriteria = $('#landing-inp').val();
     locationCriteria = $('#zipcode').val();
-    if (searchTerms.indexOf(searchCriteria) > -1) {
-        $('.search-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
-        setTimeout(loadEvents, 1000);
-    } else {
-        $('#search-jumbo').attr('class', 'container col-6')
-        let searchCriteriaDiv = $('<div>').attr('class', 'container col-6');
-        let jumbotron = $('<div>').attr('class', 'text-center');
-        let paragraph = $('<div>').attr('class', 'text-left').html('<p>None found. Try using one of these search terms:</p><div class="row"><div class="col"><ul><li>school-holidays</li><li>public-holidays</li><li>observances</li><li>politics</li><li>conferences</li><li>expos</li><li>concerts</li><li>festivals</li></ul></div><div class="col"><ul><li>performing-arts</li><li>sports</li><li>community</li><li>daylight-savings</li><li>airport-delays</li><li>severe-weather</li><li>disasters</li><li>terror</li></ul></div></div></div></div>');
-        jumbotron.append(paragraph);
-        searchCriteriaDiv.append(jumbotron);
-        $('.content').prepend(searchCriteriaDiv);
-    }
+    // if (searchTerms.indexOf(searchCriteria) > -1) {
+    $('.search-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+    setTimeout(loadEvents, 1000);
+    // } else {
+    //     $('#search-jumbo').attr('class', 'container col-6')
+    //     let searchCriteriaDiv = $('<div>').attr('class', 'container col-6');
+    //     let jumbotron = $('<div>').attr('class', 'text-center');
+    //     let paragraph = $('<div>').attr('class', 'text-left').html('<p>None found. Try using one of these search terms:</p><div class="row"><div class="col"><ul><li>school-holidays</li><li>public-holidays</li><li>observances</li><li>politics</li><li>conferences</li><li>expos</li><li>concerts</li><li>festivals</li></ul></div><div class="col"><ul><li>performing-arts</li><li>sports</li><li>community</li><li>daylight-savings</li><li>airport-delays</li><li>severe-weather</li><li>disasters</li><li>terror</li></ul></div></div></div></div>');
+    //     jumbotron.append(paragraph);
+    //     searchCriteriaDiv.append(jumbotron);
+    //     $('.content').prepend(searchCriteriaDiv);
+    // }
 });
 
 
@@ -210,8 +218,8 @@ user.once('value').then(function (snapshot) {
 
     })
 });
-// Logic to get location
 
+// Logic to get location
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -244,6 +252,19 @@ function showPosition(position) {
     });
 }
 
+// when search button is clicked, switch to search page
+$('#search-link').on('click', function() {
+    window.location = 'index.html'
+})
+
+$('#user-profile-link').on('click', function() {
+    if (sessionStorage.getItem('username') === null) {
+        window.location('login.html');
+    } else {
+        window.location('userPage.html')
+    }
+})
+
 function showError(error) {
     switch (error.code) {
         case error.PERMISSION_DENIED:
@@ -267,5 +288,50 @@ function showEvents(json) {
         $("#events").append("<p>" + json._embedded.events[i].name + "</p>");
     }
 }
+
+
+// create event page functionality
+$("#create-event").on("click",function(event){
+  event.preventDefault();
+
+   let newEventName=$("#event-name-input").val();
+   let newEventLocation=$("#event-location-input").val();
+   let newEventStartDate=$("#event-date-start-input").val();
+   let newEventStartTime=$("#event-time-start-input").val();
+   let newEventEndDate=$("#event-date-end-input").val();
+   let newEventEndTime=$("#event-time-end-input").val();
+   let newEventDescription=$("#event-description-input").val();
+
+
+  let database = firebase.database().ref('Events/'+ newEventName);
+
+  database.set({
+
+     Name: newEventName,
+     Zipcode: newEventLocation,
+     Start: newEventStartDate,
+     Expire: newEventEndDate,
+     StartTime: newEventStartTime,
+     EndTime: newEventEndTime,
+     Description: newEventDescription,
+     DateAdded: moment(firebase.database.ServerValue.TIMESTAMP).format('dddd, MMMM Do YYYY, hh:mm'),
+     Admin: username
+
+  });
+
+  $('#add-event-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+  setTimeout(function() {
+    $('#add-event-form').html('<h1>New Event Created! Returning To Search...').css('text-align', 'center');
+    setTimeout(function() {
+        window.location.href = "index.html"; 
+    }, 500);
+  }, 2000);
+
+});
+
+
+
+
+
 
 getLocation();
