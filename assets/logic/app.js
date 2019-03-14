@@ -8,6 +8,8 @@ let dataStore = {
     startDate: null,
     endDate: null,
     name: null,
+    imageUrl:null,
+    venue:null,
     description: null
 }
 
@@ -19,18 +21,22 @@ function loadEventsData(response) {
     // console.log(response);
     response._embedded.events.map(event => {
         let resultDiv = $('<div>').attr('class', 'jumbotron text-center mt-3').attr('id', 'new-jumbo');
-        console.log('start', event.dates.start.localDate);
+        console.log('start', event.dates.start.dateTime);
         console.log('end', event.sales.public.endDateTime);
-        dataStore.startDate = moment(event.dates.start.localDate).format('dddd, MMMM Do YYYY');
-        dataStore.endDate = moment(event.sales.public.endDateTime).format('dddd, MMMM Do YYYY');
+        dataStore.startDate = moment(event.dates.start.dateTime).format('dddd, MMMM Do YYYY, h:mm:ss a');
+        // dataStore.endDate = moment(event.sales.public.endDateTime).format('dddd, MMMM Do YYYY');
         dataStore.name = event.name;
         dataStore.description = event.name;
-        let startDateDiv = $('<p>').attr('class', 'row mt-5').attr('id', `startDate-${counter}`).text(`Start Date: ${dataStore.startDate}`);
-        let endDateDiv = $('<p>').attr('class', 'row').attr('id', `endDate-${counter}`).text(`End Date: ${dataStore.endDate}`);
+        dataStore.imageUrl=event.images[1].url;
+        dataStore.venue= event._embedded.venues[0].name;
+        let imageDiv = $('<img>').attr('class', 'col mt-5').attr('id', `image-${counter}`).attr('src', `${dataStore.imageUrl}`).attr('width', '10%');
+        let startDateDiv = $('<p>').attr('class', 'row mt-5').attr('id', `startDate-${counter}`).text(`Date: ${dataStore.startDate}`);
+        // let endDateDiv = $('<p>').attr('class', 'row').attr('id', `endDate-${counter}`).text(`End Date: ${dataStore.endDate}`);
         let nameDiv = $('<h3>').attr('class', 'row').attr('id', `name-${counter}`).text(`Event: ${dataStore.name}`);
         let descriptionDiv = $('<p>').attr('class', 'row').attr('id', `description-${counter}`).text(dataStore.description);
+        let venueDiv = $('<p>').attr('class', 'row').attr('id', `venue-${counter}`).text(`Venue: ${dataStore.venue}`);
         let addButton = $('<button>').attr('class', 'fun-button landing-button row save-event-button').attr('id', `save-event-button-${counter}`).text('Save Event');
-        resultDiv.append(nameDiv, startDateDiv, endDateDiv, descriptionDiv, addButton);
+        resultDiv.append(imageDiv,nameDiv, startDateDiv, descriptionDiv,venueDiv, addButton);
         $('.content').append(resultDiv);
         counter++;
     })
@@ -207,9 +213,7 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        alert('You need to allow the location!')
-        // var x = document.getElementById("location");
-        // x.innerHTML = "Geolocation is not supported by this browser.";
+        alert('You need to allow the location!');
     }
 }
 
@@ -247,6 +251,6 @@ function showError(error) {
     }
 }
 
-$(`#near-me-btn`).on("click", async function () {
-    await getLocation();
+$(`#near-me-btn`).on("click", function () {
+     getLocation();
 });
