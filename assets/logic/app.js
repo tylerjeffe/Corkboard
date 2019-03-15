@@ -49,40 +49,9 @@ function loadEvents() {
         url,
         method
     }).then((response) => {
-<<<<<<< HEAD
-        let counter = 0;
-        console.log(response._embedded.events);
-        $('#backgroundVideo').remove();
-        $('.content').html('').css('position', 'static').attr('class', 'content row mt-5');
-        response._embedded.events.map(event => {
-            let resultDiv = $('<div>').attr('class', 'jumbotron text-center mt-3').attr('id', 'new-jumbo');
-            console.log('start', event.dates.start.localDate);
-            console.log('end', event.sales.public.endDateTime);
-            dataStore.startDate = moment(event.dates.start.localDate).format('dddd, MMMM Do YYYY, hh mm');
-            dataStore.endDate = moment(event.sales.public.endDateTime).format('dddd, MMMM Do YYYY, hh mm');
-            dataStore.name = event.name;
-            dataStore.description = event.name;
-            let startDateDiv = $('<p>').attr('class', 'row mt-5').attr('id', `startDate-${counter}`).text(`Start Date: ${dataStore.startDate}`);
-            let endDateDiv = $('<p>').attr('class', 'row').attr('id', `endDate-${counter}`).text(`End Date: ${dataStore.endDate}`);
-            let nameDiv = $('<h3>').attr('class', 'row').attr('id', `name-${counter}`).text(`Event: ${dataStore.name}`);
-            let descriptionDiv = $('<p>').attr('class', 'row').attr('id', `description-${counter}`).text(dataStore.description);
-            let addButton = $('<button>').attr('class', 'fun-button landing-button row save-event-button').attr('id', `save-event-button-${counter}`).text('Save Event');
-            resultDiv.append(nameDiv, startDateDiv, endDateDiv, descriptionDiv, addButton);
-            $('.content').append(resultDiv);
-            counter++;
-        })
-    }).catch(function(){
-        // alert('No events found');
-        $('.search-form').html('');
-        let h1 = $('<h3>').text('No events were found...');
-        let button = $('<button>').attr('class', 'fun-button landing-button').attr('id', 'newSearchBtn').text('Try Again?');
-        $('.search-form').append(h1, button);
-        // location.reload();
-=======
         loadEventsData(response);
     }).catch(function () {
         alert('No events found');
->>>>>>> 8146d8c561bb5a9c9be1085813c432c696203bc9
     });
 }
 $('.search-form').on('click', '#newSearchBtn', function() {
@@ -94,26 +63,10 @@ let locationCriteria;
 $(`#searchBtn`).on("click", function () {
     let searchTerms = ['event', 'volunteer', 'attraction', 'conferences', 'politics', 'concerts', 'festivals', 'dog', 'sports', 'community', 'airport', 'weather', 'disasters', 'terror'];
     searchCriteria = $('#landing-inp').val();
-<<<<<<< HEAD
-    locationCriteria = $('#zipcode').val();
-    // if (searchTerms.indexOf(searchCriteria) > -1) {
-    $('.search-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
-    setTimeout(loadEvents, 1000);
-    // } else {
-    //     $('#search-jumbo').attr('class', 'container col-6')
-    //     let searchCriteriaDiv = $('<div>').attr('class', 'container col-6');
-    //     let jumbotron = $('<div>').attr('class', 'text-center');
-    //     let paragraph = $('<div>').attr('class', 'text-left').html('<p>None found. Try using one of these search terms:</p><div class="row"><div class="col"><ul><li>school-holidays</li><li>public-holidays</li><li>observances</li><li>politics</li><li>conferences</li><li>expos</li><li>concerts</li><li>festivals</li></ul></div><div class="col"><ul><li>performing-arts</li><li>sports</li><li>community</li><li>daylight-savings</li><li>airport-delays</li><li>severe-weather</li><li>disasters</li><li>terror</li></ul></div></div></div></div>');
-    //     jumbotron.append(paragraph);
-    //     searchCriteriaDiv.append(jumbotron);
-    //     $('.content').prepend(searchCriteriaDiv);
-    // }
-=======
     locationCriteria = $('#statecode').val();
     // if (searchTerms.indexOf(searchCriteria) > -1) {
     $('.search-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
     setTimeout(loadEvents, 1000);
->>>>>>> 8146d8c561bb5a9c9be1085813c432c696203bc9
 });
 
 
@@ -314,62 +267,6 @@ function showError(error) {
     }
 }
 
-<<<<<<< HEAD
-
-function showEvents(json) {
-    for (var i = 0; i < json.page.size; i++) {
-        $("#events").append("<p>" + json._embedded.events[i].name + "</p>");
-    }
-}
-
-
-// create event page functionality
-$("#create-event").on("click",function(event){
-  event.preventDefault();
-
-   let newEventName=$("#event-name-input").val();
-   let newEventLocation=$("#event-location-input").val();
-   let newEventStartDate=$("#event-date-start-input").val();
-   let newEventStartTime=$("#event-time-start-input").val();
-   let newEventEndDate=$("#event-date-end-input").val();
-   let newEventEndTime=$("#event-time-end-input").val();
-   let newEventDescription=$("#event-description-input").val();
-
-
-  let database = firebase.database().ref('Events/'+ newEventName);
-
-  database.set({
-
-     Name: newEventName,
-     Zipcode: newEventLocation,
-     Start: newEventStartDate,
-     Expire: newEventEndDate,
-     StartTime: newEventStartTime,
-     EndTime: newEventEndTime,
-     Description: newEventDescription,
-     DateAdded: moment(firebase.database.ServerValue.TIMESTAMP).format('dddd, MMMM Do YYYY, hh:mm'),
-     Admin: username
-
-  });
-
-  $('#add-event-form').html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
-  setTimeout(function() {
-    $('#add-event-form').html('<h1>New Event Created! Returning To Search...').css('text-align', 'center');
-    setTimeout(function() {
-        window.location.href = "index.html"; 
-    }, 500);
-  }, 2000);
-
-});
-
-
-
-
-
-
-getLocation();
-=======
 $(`#near-me-btn`).on("click", function () {
      getLocation();
 });
->>>>>>> 8146d8c561bb5a9c9be1085813c432c696203bc9
