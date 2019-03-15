@@ -54,6 +54,9 @@ function loadEvents() {
         alert('No events found');
     });
 }
+$('.search-form').on('click', '#newSearchBtn', function() {
+    location.reload();
+})
 
 let searchCriteria;
 let locationCriteria;
@@ -207,8 +210,8 @@ user.once('value').then(function (snapshot) {
 
     })
 });
-// Logic to get location
 
+// Logic to get location
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -232,6 +235,19 @@ function showPosition(position) {
         }
     });
 }
+
+// when search button is clicked, switch to search page
+$('#search-link').on('click', function() {
+    window.location = 'index.html'
+})
+
+$('#user-profile-link').on('click', function() {
+    if (sessionStorage.getItem('username') === null) {
+        window.location('login.html');
+    } else {
+        window.location('userPage.html')
+    }
+})
 
 function showError(error) {
     switch (error.code) {
