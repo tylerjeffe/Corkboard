@@ -29,14 +29,14 @@ function loadEventsData(response) {
         dataStore.description = event.name;
         dataStore.imageUrl=event.images[1].url;
         dataStore.venue= event._embedded.venues[0].name;
-        let imageDiv = $('<img>').attr('class', 'col mt-5').attr('id', `image-${counter}`).attr('src', `${dataStore.imageUrl}`).attr('width', '10%');
-        let startDateDiv = $('<p>').attr('class', 'row mt-5').attr('id', `startDate-${counter}`).text(`Date: ${dataStore.startDate}`);
+        let imageDiv = $('<img>').attr('class', 'col mt-5 pulled-image').attr('id', `image-${counter}`).attr('src', `${dataStore.imageUrl}`);
+        let startDateDiv = $('<p>').attr('class', 'row mt-5 text-center').attr('id', `startDate-${counter}`).text(`Date: ${dataStore.startDate}`);
         // let endDateDiv = $('<p>').attr('class', 'row').attr('id', `endDate-${counter}`).text(`End Date: ${dataStore.endDate}`);
         let nameDiv = $('<h3>').attr('class', 'row').attr('id', `name-${counter}`).text(`Event: ${dataStore.name}`);
         let descriptionDiv = $('<p>').attr('class', 'row').attr('id', `description-${counter}`).text(dataStore.description);
         let venueDiv = $('<p>').attr('class', 'row').attr('id', `venue-${counter}`).text(`Venue: ${dataStore.venue}`);
         let addButton = $('<button>').attr('class', 'fun-button landing-button row save-event-button').attr('id', `save-event-button-${counter}`).text('Save Event');
-        resultDiv.append(imageDiv,nameDiv, startDateDiv, descriptionDiv,venueDiv, addButton);
+        resultDiv.append(nameDiv,imageDiv,startDateDiv, descriptionDiv,venueDiv, addButton);
         $('.content').append(resultDiv);
         counter++;
     })
