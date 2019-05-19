@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <!-- MetaData Goes Here -->
+      <!-- Link Bootstrap -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <!-- Link FireBase -->
+      <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+      <!-- Link JQuery -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <!-- Link Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Fredericka+the+Great|Roboto:400,500" rel="stylesheet">
+      <!-- Link Custom CSS -->
+      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      
+    </head>
+
+<body id="add-event-body">
+  <!-- navbar -->
+  <nav id="user-profile-nav" class="navbar navbar-expand-md">
+      <a class="navbar-brand" id="user-profile-link" href="userPage.html">My Profile</a>
+  </nav>
+  <!-- end navbar -->
+
+  <div class="container mt-5">
+    <div class="row" id="add-event-container">
+      <div class='card col-lg-6' id="add-event-form">    
+        <form>    
+          <div class="card-header" id="add-event-header">Add Event</div>
+          <div class="form-group"> 
+            <label for="event-name">Event Name</label>
+            <input type="text" class="input" id="event-name-input"  placeholder="Garage Sale!" required>
+          </div>
+          <div class="form-group">
+            <label for="event-location">Event Location (Zip Code)</label>
+            <input type="number" class="input" id="event-location-input" placeholder="97213" required>
+          </div>
+          <div class="form-group">
+              <label for="event-date">Event Date Start</label>
+              <input type="date" class="input" id="event-date-start-input" required>
+          </div>
+          <div class="form-group">
+              <label for="event-time">Event Time Start</label>
+              <input type="time" class="input" id="event-time-start-input" value="11:00">
+            </div>
+          <div class="form-group">
+              <label for="event-date">Event Date End</label>
+              <input type="date" class="input" id="event-date-end-input">
+          </div>
+          <div class="form-group">
+            <label for="event-time">Event Time End</label>
+            <input type="time" class="input" id="event-time-end-input" value="21:30">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="input" id="event-description-input" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="create-event">Create Event</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+<!-- Link Custom JS -->
+<script type="text/javascript" src="assets/logic/app.js"></script>
+<!-- <script type="text/javascript" src="assets/logic/createEvent.js"></script> -->
+</body>
+</html> 

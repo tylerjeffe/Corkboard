@@ -7,12 +7,20 @@
 /* #EBECED WHITE WASH */
 /* #4C586F DENIM */
 /* #3E3E3B GUNMETAL */
-
-
 body {
   background-color: #CBC5C1;
+  font-family: 'News Cycle', sans-serif;
+  font-size: 20px;
 }
 /*Landing Page CSS*/
+#logo {
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 75px;
+}
+.pulled-image {
+  width: 600px;
+  height: 300px;
+}
 #backgroundVideo {
 	position: fixed;
 	right: 0;
@@ -94,6 +102,11 @@ input:hover {
 input:focus {
       background: none;
       outline: none;
+}
+#new-jumbo {
+  width: 49%;
+  margin: 0.5%;
+  text-align: center;
 }
 /*End Landing Page CSS*/
 
@@ -375,3 +388,45 @@ input:focus {
   }
 }
 /*End Loader CSS*/
+
+/*add event css*/
+/*I looked up some design inspirations, and thought this color combo would be nice*/
+/* #CBC5C1 CASHMERE */ 
+/* #A2AAB0 FRENCH BLUE */
+/* #EBECED WHITE WASH */
+/* #4C586F DENIM */
+/* #3E3E3B GUNMETAL */
+
+/*add event css*/
+#add-event-body {
+  background-color: #ebeced;
+}
+#add-event-header {
+  padding: 0;
+  margin: 25px 20px;
+  font-size: 25px;
+  background-color: #4C586F;
+}
+#add-event-form {
+  padding: 0;
+  margin: 0% auto;
+  background-color: #4C586F;
+  color: white;
+}
+#add-event-body label {
+  margin: 0 25px;
+}
+#add-event-body input {
+  background-color: #ebeced;
+  width: 80%;
+  margin-left: 25px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+#create-event {
+  margin: 10px 25px;
+}
+#event-description-input {
+  height: 200px;
+}
+/*end add event css*/

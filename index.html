@@ -7,8 +7,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<!-- FontAwesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<!-- google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|News+Cycle" rel="stylesheet">
 	<!-- Link Custom CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 </head>
 <body>
 	<!-- background video -->
@@ -29,10 +32,10 @@
 	    <div class="navbar-collapse collapse w-100 order-0 dual-collapse2">
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a class="nav-link" href="#"><i class="fas fa-search"></i> Search</a>
+	                <a class="nav-link" href="index.html"><i class="fas fa-search"></i> Search</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="#"><i class="fas fa-plus"></i> Create Event</a>
+	                <a class="nav-link" href="createEvent.html" id="create-event-page-load"><i class="fas fa-plus"></i> Create Event</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -43,7 +46,7 @@
 	<div class="content row">
 		<div id="search-jumbo" class="container">
 			<div class="jumbotron text-center">
-				<h1>CorkBoard</h1>
+				<h1 id="logo">corkboard</h1>
 				<h3>Search your neighborhood for events</h3>
 				<div class="search-form">
 					<input type="text" id="landing-inp" placeholder="Type to Search">
@@ -99,9 +102,9 @@
 							<option value="WI">Wisconsin</option>
 							<option value="WY">Wyoming</option>
 						</select>
-					<button class="fun-button landing-button" id="searchBtn">Search</button>
-					<button class="fun-button landing-button" id="near-me-btn">Near Me</button>
 				</div>
+				<button class="fun-button landing-button d-inline" id="searchBtn">Search</button>
+					<button class="fun-button landing-button d-inline" id="near-me-btn">Near Me</button>
 			</div>
 		</div>
 	</div>
