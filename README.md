@@ -1,4 +1,3 @@
-# volunteerSearch
-volunteer Search
+Event search website -class project
 
 www.corkboardinfo.com
